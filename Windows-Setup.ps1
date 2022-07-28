@@ -1,4 +1,4 @@
-﻿<#
+<#
 Company: Self
 Contact: colebermudezpro@startmail.com
 Created: October 15, 2021
@@ -97,8 +97,8 @@ powercfg.exe -change -standby-timeout-ac 0
 powercfg.exe -change -standby-timeout-dc 0
 powercfg.exe -change -hibernate-timeout-ac 0
 powercfg.exe -change -hibernate-timeout-dc 0
-#Set Mountain Time Zone
-Set-TimeZone -Id "Mountain Standard Time"
+#Set Eastern Time Zone
+Set-TimeZone -Id "Eastern Standard Time"
 
 #Enable .NET Framework
 Write-Host -ForegroundColor Green "Enable .NET Framework"
@@ -124,53 +124,6 @@ $Parameters = @{
 }
 Set-SmbServerConfiguration @Parameters
 
-#Set Group Policy options
-Write-Host -ForegroundColor Green "Setting Password Policy:"
-Write-Host -ForegroundColor Green "Password History:10 `nMaximum Password Age:Unlimited `nMinimum Password Age:0 `nMinimum Password Length: 12 `nMust Meet Complexity Requirements"
-##Enforce password history
-net accounts /uniquepw:10
-##Set maximum password age
-net accounts /maxpwage:unlimited
-## Set minimum password age 0
-net accounts /minpwage:0
-#Set minimum password length 12
-net accounts /minpwlen: 12
-##Set must meet complexity requirements
-<# This part is a bit weird. It does the following:
-Exports the GPO config to root of C:
-Edits one line to enable Password Complexity
-Imports itself into GPO
-Deletes the exported file
-#>
-secedit /export /cfg c:\secpol.cfg
-(GC C:\secpol.cfg) -Replace "PasswordComplexity = 0","PasswordComplexity = 1" | Out-File C:\secpol.cfg
-secedit /configure /db c:\windows\security\local.sdb /cfg c:\secpol.cfg /areas SECURITYPOLICY
-Remove-Item C:\secpol.cfg -Force
-
-##Set lockout threshold
-Write-Host -ForegroundColor Green "Setting Account Security Policy:"
-Write-Host -ForegroundColor Green "Account Lockout Threshold: 5 `nAccount Lockout Duration: 30 minutes `nAccount Lockout Counter Restet: 30 minutes"
-net accounts /lockoutthreshold:5
-##Set account lockout duration
-net accounts /lockoutduration:30
-#Reset acccount lockout counter
-net accounts /lockoutwindow:30
-#Enable screen saver
-Write-Host -ForegroundColor Green "Further Hardening:"
-Write-Host -ForegroundColor Green "`nScreen Saver Enabled `nScreen Saver Timeout: 15 minutes `nSpecific Screen Saver Set `nPassword Protected Screen Saver `nSceen Saver Cannot Be Changed"
-REG DEL "HKLM\SOFTWARE\Policies\Microsoft\Windows\Control Panel\Desktop" /v ScreenSaveActive /f
-#Set screen saver timeout 900
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Control Panel\Desktop" /v ScreenSaveTimeOut /t REG_SZ /d 900 /f
-#Set specific screensaver scrnsave.scr
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Control Panel\Desktop" /v SCRNSAVE.EXE /t REG_SZ /d C:\Windows\system32\scrnsave.scr /f
-#Password protect the screen saver enabled
-REGA DD "HKLM:\Software\Policies\Microsoft\Windows\Control Panel\Desktop" /v ScreenSaverIsSecure /t REG_SZ /d 1 /f
-#Prevent changing the screen saver enabled
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v NoDispScrSavPage \t REG_DWORD /d 1 /f
-#Enable Bitlocker
-Write-Host -ForegroundColor Green "Enabled Bitlocker. Key saved to External Device."
-Enable-BitLocker -MountPoint "C:" -EncryptionMethod Aes128 -RecoveryKeyPath "D:\Recovery\" -RecoveryKeyProtector
-Enable-BitLocker -MountPoint "C:" -EncryptionMethod Aes128 -RecoveryKeyPath "E:\Recovery\" -RecoveryKeyProtector
 
 
 #Create Local User
@@ -205,6 +158,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 #Install 7-zip
     choco install 7zip -y
+	
+#Install Notepad++
+    choco install notepadplusplus -y
 
 #Enable RDP
 Write-Host -ForegroundColor Green "Enable RDP"
@@ -305,8 +261,8 @@ Start-Sleep 15
     Set-Service "HomeGroupListener" -StartupType Disabled
     Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
     Set-Service "HomeGroupProvider" -StartupType Disabled
-    Write-Host  -ForegroundColor Green "Disabling Remote Assistance..."
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Type DWord -Value 0
+#    Write-Host  -ForegroundColor Green "Disabling Remote Assistance..."
+#    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Type DWord -Value 0
     Write-Host  -ForegroundColor Green "Disabling Storage Sense..."
     Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" -Recurse -ErrorAction SilentlyContinue
     Write-Host -ForegroundColor Green "Stopping and disabling Superfetch service..."
