@@ -45,8 +45,8 @@ autoLogon and stored credential regkeys.
 #>
 
 # Download needed scripts
-Invoke-WebRequest "https://raw.githubusercontent.com/omurphy522/Windows-Deployment/main/cleanup.ps1" -OutFile C:\Support\Scripts\cleanup.ps1
-Invoke-WebRequest "https://raw.githubusercontent.com/omurphy522/Windows-Deployment/main/Windows-Setup.ps1" -OutFile C:\Support\Scripts\WindowsSetup.ps1
+Invoke-WebRequest "https://raw.githubusercontent.com/omurphy522/Windows-Depolyment/main/cleanup.ps1" -OutFile C:\Support\Scripts\cleanup.ps1
+Invoke-WebRequest "https://raw.githubusercontent.com/omurphy522/Windows-Depolyment/main/Windows-Setup.ps1" -OutFile C:\Support\Scripts\WindowsSetup.ps1
 
 # Set admin user PasswordExpires to never
 Set-LocalUser -Name "LocalAdmin" -PasswordNeverExpires 1
