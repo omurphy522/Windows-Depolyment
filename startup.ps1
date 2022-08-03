@@ -96,9 +96,6 @@ Write-Host -ForegroundColor Green "Install Chocolatey to automate basic program 
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 	choco install chocolatey-core.extension -y
 
-#Install Java
-    choco install jre8 -y
-
 #Install Firefox
     choco install firefox -y
 
@@ -111,33 +108,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 #Install 7-zip
     choco install 7zip -y
 	
-#Install Notepad++
-    choco install notepadplusplus -y
-    
-#Install Wireshark
-    choco install wireshark -y
-    
-#Install OpenVPN
-    choco install tapwindows --version 9.24.2 -y
-    
-#Install Advanced IP Scanner
-    choco install advanced-ip-scanner --version 2.5.4594.1 -y
-    
-#Install Audacity
-    choco install audacity --version 3.1.3 -y
-    
-#Install Filezilla Client
-    choco install filezilla --version 3.60.2 -y
-    
-#Install Filezilla Server
-    choco install filezilla.server --version 1.5.0 -y
-    
 #Install Foxit PDF reader
-    choco install foxitreader --version 12.0.0.1239400 -y
-    
-#Install Zoiper
-    choco install zoiper --version 5.5.10 -y
-    
+    choco install foxitreader --version 12.0.0.1239400 -y    
 
 #Enable RDP
 Write-Host -ForegroundColor Green "Enable RDP"
