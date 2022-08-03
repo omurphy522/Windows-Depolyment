@@ -33,7 +33,7 @@ REG DELETE "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Defau
 
 
 # Run WindowsSetup2_0-WIP
-iex -Command "C:\Support\Scripts\Windows-Setup.ps1"
+iex -Command "C:\Support\Scripts\startup.ps1"
 
 # Removes install directories except logs
 Remove-Item -Path C:\\Support\\Scripts -Recurse -Verbose
