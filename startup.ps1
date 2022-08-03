@@ -20,33 +20,6 @@ Changes By Cole Bermudez:
 # Create a log file for debugging
 Start-Transcript -Append C:\Support\Logs\WindowsSetupLog.txt
 
-#Set the Computer name
-while ($confirmInfo -ne 'y') {
-	$compName = (Read-Host "Enter New Computer Name")
-
-	Write-Output "`n`nComputer Name: $compName`n"
-	$confirmInfo = (Read-Host "Is this information correct Y/N")
-	}
-
-#Set admin password
-do {
-Write-Host "`nEnter Admin password"
-    $pwd1 = Read-Host "Password" -AsSecureString
-    $pwd2 = Read-Host "Confirm Password" -AsSecureString
-    $pwd1_text = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($pwd1))
-    $pwd2_text = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($pwd2))
-    
-    if ($pwd1_text -ne $pwd2_text) {
-    Write-Warning "`nPasswords do not match. Please try again."
-    }
-}
-while ($pwd1_text -ne $pwd2_text)
-
-Write-Host "`n`nPasswords matched"
-$userPass = $pwd1
-$pwd1_text = 'a'
-$pwd2_text = 'a'
-
 #initiates the variables required for the script
 $diskProps = (Get-PhysicalDisk | where size -gt 100gb)
 $cortanaPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"
