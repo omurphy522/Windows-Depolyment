@@ -341,6 +341,8 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "RemoteAccess"                                 # Routing and Remote Access
     "RemoteRegistry"                               # Remote Registry
     "SharedAccess"                                 # Internet Connection Sharing (ICS)
+    "filezilla-server"                             # FileZilla Server 
+    "FoxitReaderUpdateService"                     #FoxitPDF Updater
     "TrkWks"                                       # Distributed Link Tracking Client
     #"WbioSrvc"                                     # Windows Biometric Service (required for Fingerprint reader / facial detection)
     #"WlanSvc"                                      # WLAN AutoConfig
