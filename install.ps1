@@ -46,7 +46,7 @@ autoLogon and stored credential regkeys.
 
 # Download needed scripts
 Invoke-WebRequest "https://raw.githubusercontent.com/omurphy522/Windows-Depolyment/main/cleanup.ps1" -OutFile C:\Support\Scripts\cleanup.ps1
-Invoke-WebRequest "https://raw.githubusercontent.com/omurphy522/Windows-Depolyment/main/Windows-Setup.ps1" -OutFile C:\Support\Scripts\WindowsSetup.ps1
+Invoke-WebRequest "https://raw.githubusercontent.com/omurphy522/Windows-Depolyment/main/startup.ps1" -OutFile C:\Support\Scripts\startup.ps1
 
 # Set admin user PasswordExpires to never
 Set-LocalUser -Name "LocalAdmin" -PasswordNeverExpires 1
@@ -58,7 +58,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OOBE" /v DisablePrivacyExperie
 REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 1 /f
 REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultDomainName /t REG_SZ /d . /f
 REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d LocalAdmin /f
-REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d 'admin' /f
+REG ADD "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d 'T0pl3^3l' /f
 
 # Remove autologon after Automate installs
 REG ADD "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v !cleanup /t REG_SZ /d 'PowerShell -ExecutionPolicy Bypass -File C:\Support\Scripts\cleanup.ps1' /f
