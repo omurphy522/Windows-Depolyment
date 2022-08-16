@@ -112,31 +112,31 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
     choco install 7zip -y
 	
 #Install Notepad++
-#    choco install notepadplusplus -y
+    choco install notepadplusplus -y
     
 #Install Wireshark
-#    choco install wireshark -y
+    choco install wireshark -y
     
 #Install OpenVPN
-#    choco install tapwindows --version 9.24.2 -y
+    choco install tapwindows --version 9.24.2 -y
     
 #Install Advanced IP Scanner
-#    choco install advanced-ip-scanner --version 2.5.4594.1 -y
+    choco install advanced-ip-scanner --version 2.5.4594.1 -y
     
 #Install Audacity
-#    choco install audacity --version 3.1.3 -y
+    choco install audacity --version 3.1.3 -y
     
 #Install Filezilla Client
-#    choco install filezilla --version 3.60.2 -y
+    choco install filezilla --version 3.60.2 -y
     
 #Install Filezilla Server
-#    choco install filezilla.server --version 1.5.0 -y
+    choco install filezilla.server --version 1.5.0 -y
     
 #Install Foxit PDF reader
     choco install foxitreader --version 12.0.0.1239400 -y
     
 #Install Zoiper
-#    choco install zoiper --version 5.5.10 -y
+    choco install zoiper --version 5.5.10 -y
     
 
 #Enable RDP
